@@ -71,7 +71,7 @@ https://explorer.solana.com/tx/3LiCVNBZj2FSJk4n2PNCtBAuzHQb643H1DNzgxzyoUJtvoEh7
 
 Make sure you are checking the DEVNET network
 
-#Deploy to mainnet:
+# Deploy to mainnet:
 
 1. connect to mainnet-beta
 ```solana config set --url https://solana-api.projectserum.com```
