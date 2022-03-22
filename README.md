@@ -1,4 +1,4 @@
-* Changing the contract to a new split arrangement
+# Changing the contract to a new split arrangement
 
 1. Fork this repoistory and set it up on your machine.
 
@@ -10,7 +10,7 @@
 
 3. Run `anchor test` to see the tests pass (4 passing)
 
-* Deploy to devnet/mainnet first steps
+# Deploy to devnet/mainnet first steps
 
 If you want to deploy to the devnet or mainnet-beta networks, first complete these steps, then complete the relevant section below.
 
@@ -34,7 +34,7 @@ Your idl will be `./target/idl/anchor.json` but I think you need to put the full
 
 5. update each app/split.ts script with the new wallet addresses (between "CONFIG START" and "CONFIG END")
 
-* Deploy to devnet
+# Deploy to devnet
 
 1. connect to devnet
 ```solana config set --url https://metaplex.devnet.rpcpool.com/```
@@ -71,7 +71,7 @@ https://explorer.solana.com/tx/3LiCVNBZj2FSJk4n2PNCtBAuzHQb643H1DNzgxzyoUJtvoEh7
 
 Make sure you are checking the DEVNET network
 
-* Deploy to mainnet:
+#Deploy to mainnet:
 
 1. connect to mainnet-beta
 ```solana config set --url https://solana-api.projectserum.com```
