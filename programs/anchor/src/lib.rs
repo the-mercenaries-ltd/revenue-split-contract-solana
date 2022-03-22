@@ -6,7 +6,7 @@ use solana_program::{
     account_info::AccountInfo,
     entrypoint::ProgramResult, program::invoke, program::invoke_signed, system_instruction,
 };
-declare_id!("5xbYuZUnisvPi1ZP1JNGADeqLedyPm6GvMqxrQSMWvZA");
+declare_id!("2tQ8WV5rkEdHXCpSEjvE4RgoK9Hxyuj4YqeWGfJaufjv");
 
 #[program]
 pub mod anchor {

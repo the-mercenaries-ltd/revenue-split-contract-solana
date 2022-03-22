@@ -3,12 +3,16 @@ const { SystemProgram, LAMPORTS_PER_SOL } = anchor.web3;
 import { Program } from "@project-serum/anchor";
 import { PublicKey, Keypair } from "@solana/web3.js";
 
-anchor.setProvider(anchor.Provider.local("https://metaplex.devnet.rpcpool.com"));
+const SOLANA_RPC_URL = (process.env.SOLANA_RPC_URL) ? process.env.SOLANA_RPC_URL : "https://metaplex.devnet.rpcpool.com";
+
+anchor.setProvider(anchor.Provider.local(SOLANA_RPC_URL));
 
 async function main() {
-    const provider: anchor.Provider = anchor.Provider.local("https://metaplex.devnet.rpcpool.com");
-    const idl = JSON.parse(require('fs').readFileSync('/root/vexfundforward/target/idl/anchor.json', 'utf8'));
-    const programId = new anchor.web3.PublicKey('5xbYuZUnisvPi1ZP1JNGADeqLedyPm6GvMqxrQSMWvZA');
+    const provider: anchor.Provider = anchor.Provider.local(SOLANA_RPC_URL);
+    // CONFIG START
+    const idl = JSON.parse(require('fs').readFileSync('/Users/ph/Projects/the-mercenaries-ltd/revenue-split-contract-solana-example/target/idl/anchor.json', 'utf8'));
+    const programId = new anchor.web3.PublicKey('2tQ8WV5rkEdHXCpSEjvE4RgoK9Hxyuj4YqeWGfJaufjv');
+    // CONFIG END
     const program: Program = new anchor.Program(idl, programId);
 
     let extraLamports = LAMPORTS_PER_SOL * 0.01;
