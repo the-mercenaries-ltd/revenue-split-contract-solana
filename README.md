@@ -11,6 +11,7 @@
 3. Run `anchor test` to see the tests pass (4 passing)
 
 **Deploy to devnet/mainnet first steps:**
+
 If you want to deploy to the devnet or mainnet-beta networks, first complete these steps, then complete the relevant section below.
 
 1. if you haven't already, set an ANCHOR_WALLET to the wallet which will pay tx fees
