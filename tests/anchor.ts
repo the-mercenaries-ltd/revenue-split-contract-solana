@@ -15,11 +15,21 @@ describe('anchor', async () => {
   let lamportsForRent = 946560;
   let extraLamports = LAMPORTS_PER_SOL * 0.1;
 
-  const walletOne = new PublicKey("AQU9o9gsYJ5n5GwF2kedSERMFYVFF9cqyMFK4JiXYT8i");
-  const walletTwo = new PublicKey("555yt8a7MtKExNzQMhQGQa5retoLuDxBpchVjgJFE9e3");
+  /** CONFIG START */
+
+  const walletOne = new PublicKey("EAdiYGQ2m9A1AzVABRwFakh6aTtY5FDFkRYpZ6ijTvXP");
+  const walletTwo = new PublicKey("HTtjYkiT9k3Ut3P7v8BCCdJnde5mvbT1unK4awNo2BtV");
   // const walletThree = Keypair.generate();
   // const walletFour = Keypair.generate();
   // const walletFive = Keypair.generate();
+
+  const walletOnePct = 0.6;
+  const walletTwoPct = 0.4;
+  // const walletThreePct = 0.5;
+  // const walletFourPct = 0.5;
+  // const walletFivePct = 0.5;
+
+  /** CONFIG END */
 
   const randomKeypair = Keypair.generate();
 
@@ -68,6 +78,10 @@ describe('anchor', async () => {
   it(`if the walletTwo key is incorrect, throw error`, async () => {
     const [poolAccount, bump] = await PublicKey.findProgramAddress([Buffer.from("escrow1")], program.programId);
 
+    console.log({
+      walletOne: walletOne.toBase58()
+    })
+
     try {
       const splitTx = await program.rpc.split(
         bump, 
@@ -83,7 +97,7 @@ describe('anchor', async () => {
     } catch(error) {
       if (error instanceof Error) {
         console.log({message: error.message})
-        assert.equal(error.message.indexOf("0x1771") != -1, true);
+        assert.equal(error.message.indexOf("0x1771") != -1, true, "InvalidWalletTwoKey error ");
       }
     }
   });
@@ -108,10 +122,10 @@ describe('anchor', async () => {
     console.log("splitTx", splitTx)
 
     let walletOneBalance = await connection.getBalance(walletOne);
-    assert.equal(walletOneBalance, extraLamports * 0.50, "walletOne's balance is wrong");
+    assert.equal(walletOneBalance, extraLamports * walletOnePct, "walletOne's balance is wrong");
 
     let walletTwoBalance = await connection.getBalance(walletTwo);
-    assert.equal(walletTwoBalance, extraLamports * 0.50, "the walletTwo's balance is wrong");
+    assert.equal(walletTwoBalance, extraLamports * walletTwoPct, "the walletTwo's balance is wrong");
   });
 
   // setInterval(() => {}, 1 << 30)

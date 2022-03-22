@@ -30,13 +30,20 @@ pub mod anchor {
         Ok(())
     }
     pub fn split(ctx: Context<Split>, bump: u8) -> ProgramResult {
-        let wallet_one_correct_key = Pubkey::from_str("AQU9o9gsYJ5n5GwF2kedSERMFYVFF9cqyMFK4JiXYT8i").unwrap();
-        let wallet_two_correct_key = Pubkey::from_str("555yt8a7MtKExNzQMhQGQa5retoLuDxBpchVjgJFE9e3").unwrap();
+        // CONFIG START
+        let wallet_one_correct_key = Pubkey::from_str("EAdiYGQ2m9A1AzVABRwFakh6aTtY5FDFkRYpZ6ijTvXP").unwrap();
+        let wallet_two_correct_key = Pubkey::from_str("HTtjYkiT9k3Ut3P7v8BCCdJnde5mvbT1unK4awNo2BtV").unwrap();
         // IMPORTANT: do not add more wallets unless you check each ones key otherwise your money can be stolen by bad actors
         // let wallet_three_correct_key = Pubkey::from_str("555yt8a7MtKExNzQMhQGQa5retoLuDxBpchVjgJFE9e3").unwrap();
         // let wallet_four_correct_key = Pubkey::from_str("555yt8a7MtKExNzQMhQGQa5retoLuDxBpchVjgJFE9e3").unwrap();
         // let wallet_five_correct_key = Pubkey::from_str("555yt8a7MtKExNzQMhQGQa5retoLuDxBpchVjgJFE9e3").unwrap();
 
+        let walletOnePct = 0.60;
+        let walletTwoPct = 0.40;
+        // let walleThreePct = 0.5;
+        // let walletFourPct = 0.5;
+        // let walletFivePct = 0.5;
+        // CONFIG END
         
         let pool_account = &ctx.accounts.pool_account.to_account_info();
         let wallet_one = &mut ctx.accounts.wallet_one.to_account_info();
@@ -74,11 +81,11 @@ pub mod anchor {
         // }
 
         let lamports_for_rent = 946560;
-        let lamports_to_send_wallet_one = ((pool_account.lamports() - lamports_for_rent) as f64  * 0.50) as u64;
-        let lamports_to_send_wallet_two = ((pool_account.lamports() - lamports_for_rent) as f64  * 0.50) as u64;
-        // let lamports_to_send_wallet_three = ((pool_account.lamports() - lamports_for_rent) as f64  * 0.05) as u64;
-        // let lamports_to_send_wallet_four = ((pool_account.lamports() - lamports_for_rent) as f64  * 0.05) as u64;
-        // let lamports_to_send_wallet_five = ((pool_account.lamports() - lamports_for_rent) as f64  * 0.05) as u64;
+        let lamports_to_send_wallet_one = ((pool_account.lamports() - lamports_for_rent) as f64  * walletOnePct) as u64;
+        let lamports_to_send_wallet_two = ((pool_account.lamports() - lamports_for_rent) as f64  * walletTwoPct) as u64;
+        // let lamports_to_send_wallet_three = ((pool_account.lamports() - lamports_for_rent) as f64  * walletThreePct) as u64;
+        // let lamports_to_send_wallet_four = ((pool_account.lamports() - lamports_for_rent) as f64  * walletFourPct) as u64;
+        // let lamports_to_send_wallet_five = ((pool_account.lamports() - lamports_for_rent) as f64  * walletFivePct) as u64;
         let lamports_total_to_send = lamports_to_send_wallet_one + lamports_to_send_wallet_two;
 
         **pool_account.try_borrow_mut_lamports()? = pool_account
@@ -92,9 +99,24 @@ pub mod anchor {
             .ok_or(ProgramError::InvalidArgument)?;
 
         **wallet_two.try_borrow_mut_lamports()? = wallet_two
-            .lamports()
-            .checked_add(lamports_to_send_wallet_two)
-            .ok_or(ProgramError::InvalidArgument)?;
+        .lamports()
+        .checked_add(lamports_to_send_wallet_two)
+        .ok_or(ProgramError::InvalidArgument)?;
+
+        // **wallet_three.try_borrow_mut_lamports()? = wallet_three
+        //     .lamports()
+        //     .checked_add(lamports_to_send_wallet_three)
+        //     .ok_or(ProgramError::InvalidArgument)?;
+
+        // **wallet_four.try_borrow_mut_lamports()? = wallet_four
+        //     .lamports()
+        //     .checked_add(lamports_to_send_wallet_four)
+        //     .ok_or(ProgramError::InvalidArgument)?;
+
+        // **wallet_five.try_borrow_mut_lamports()? = wallet_five
+        //     .lamports()
+        //     .checked_add(lamports_to_send_wallet_five)
+        //     .ok_or(ProgramError::InvalidArgument)?;
 
         Ok(())
     }
