@@ -17,9 +17,10 @@ If you want to deploy to the devnet or mainnet-beta networks, first complete the
 `export ANCHOR_WALLET=~/.config/solana/id.json`
 
 2. Get the program ID:
-
-```$ anchor keys list
-anchor: 2tQ8WV5rkEdHXCpSEjvE4RgoK9Hxyuj4YqeWGfJaufjv```
+```
+$ anchor keys list
+anchor: 2tQ8WV5rkEdHXCpSEjvE4RgoK9Hxyuj4YqeWGfJaufjv 
+```
 
 Here, make sure you update your program ID in Anchor.toml, lib.rs and each app/*.ts script.
 
@@ -47,17 +48,21 @@ Your idl will be `./target/idl/anchor.json` but I think you need to put the full
 ```ts-node ./app/initPoolAccount.ts```
 
 5. note the pool account address
-```ts-node ./app/printPoolAccount.ts
+```
+ts-node ./app/printPoolAccount.ts
 { poolAccount: '7pvEprs1maweW2eRTa87SWSNL8y5dH8LRvQRoX5bzTdN' }
-Success```
+Success
+```
 
 6. send some money to the poolAccount to test
 ```solana transfer 7pvEprs1maweW2eRTa87SWSNL8y5dH8LRvQRoX5bzTdN 0.5```
 
 7. test the split works
-```ts-node ./app/split.ts
+```
+ts-node ./app/split.ts
 splitTx 3LiCVNBZj2FSJk4n2PNCtBAuzHQb643H1DNzgxzyoUJtvoEh7ciQ1SRAd1uMn6JtGw6rTn9qTipgdq1K7nGBJmui
-Success```
+Success
+```
 
 Open up the tx in Solana Explorer or Solscan, i.e. at:
 
@@ -79,17 +84,21 @@ Make sure you are checking the DEVNET network
 ```SOLANA_RPC_URL=https://solana-api.projectserum.com ts-node ./app/initPoolAccount.ts```
 
 5. note the pool account address
-```SOLANA_RPC_URL=https://solana-api.projectserum.com ts-node ./app/printPoolAccount.ts
+```
+SOLANA_RPC_URL=https://solana-api.projectserum.com ts-node ./app/printPoolAccount.ts
 { poolAccount: '7pvEprs1maweW2eRTa87SWSNL8y5dH8LRvQRoX5bzTdN' }
-Success```
+Success
+```
 
 6. send some money to the poolAccount to test
 ```solana transfer 7pvEprs1maweW2eRTa87SWSNL8y5dH8LRvQRoX5bzTdN 0.01```
 
 7. test the split works
-```SOLANA_RPC_URL=https://solana-api.projectserum.com ts-node ./app/split.ts```
+```
+SOLANA_RPC_URL=https://solana-api.projectserum.com ts-node ./app/split.ts```
 splitTx 5QBTh5Q3tMPZK9yRg35rJ4mbHzCPHzz3jjvU1V7wXkP79i3cFnVv2p7yKETQdsjUjnfcaJPYeSLgHhrJvFCeiWwX
-Success```
+Success
+```
 
 Open up the tx in Solana Explorer or Solscan, i.e. at:
 
